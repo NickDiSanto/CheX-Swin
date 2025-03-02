@@ -1,6 +1,5 @@
 # Chest Xray Classification Using Swin Transformer
 
-![ChestXray](./images/RandomSamples.svg)
 This repo studies the effect of ImageNet pre-training and how far it can extend the applicability of Vision Transformers (ViTs) in the medical domain. To this end, we designed several experiments that utilize different settings and provide the __AUROC__ metric for the `n_trials` of each run.
 
 1. Why __AUROC__? 
