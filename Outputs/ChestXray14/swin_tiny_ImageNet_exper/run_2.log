@@ -1,0 +1,42 @@
+[2025-02-05 13:32:09.708] Namespace(dataset_name='ChestXray14', model_name='swin_tiny', init='ImageNet', normalization='imagenet', num_classes=14, output_dir=None, epochs=5, batch_size=24, img_size=224, seed=1234, exp_name='swin_tiny_ImageNet_exper', num_trial=5, device='cpu', train_list='./train_list.txt', val_list='./val_list.txt', test_list='./test_list.txt', in_chans=3, dataset_path='/cabinet/reza/datasets/NIH_Chest_X_rays/images/', valid_start_epoch=79, opt='sgd', lr=0.01, opt_eps=1e-08, opt_betas=None, clip_grad=None, momentum=0.9, weight_decay=0.0, sched='cosine', lr_noise=None, lr_noise_pct=0.67, lr_noise_std=1.0, warmup_lr=1e-06, min_lr=1e-05, decay_epochs=30, warmup_epochs=20, cooldown_epochs=10, decay_rate=0.5, patience=10, plot_path=WindowsPath('Outputs/ChestXray14/swin_tiny_ImageNet_exper/swin_tiny_ImageNet_exper_run_2.pdf'))
+[2025-02-05 13:32:24.061] Run:2-Epoch:1, TrainLoss:0.6784, TrainAcc:0.5914
+NoneType: None
+[2025-02-05 13:32:28.773] Run:2-Epoch:1, ValidLoss:0.6721, ValidAcc:0.6129
+NoneType: None
+[2025-02-05 13:32:44.709] Run:2-Epoch:2, TrainLoss:0.6737, TrainAcc:0.6136
+NoneType: None
+[2025-02-05 13:32:49.507] Run:2-Epoch:2, ValidLoss:0.6720, ValidAcc:0.6129
+NoneType: None
+[2025-02-05 13:33:05.134] Run:2-Epoch:3, TrainLoss:0.6739, TrainAcc:0.6150
+NoneType: None
+[2025-02-05 13:33:10.349] Run:2-Epoch:3, ValidLoss:0.6718, ValidAcc:0.6129
+NoneType: None
+[2025-02-05 13:33:25.080] Run:2-Epoch:4, TrainLoss:0.6720, TrainAcc:0.6093
+NoneType: None
+[2025-02-05 13:33:29.675] Run:2-Epoch:4, ValidLoss:0.6716, ValidAcc:0.6121
+NoneType: None
+[2025-02-05 13:33:44.072] Run:2-Epoch:5, TrainLoss:0.6768, TrainAcc:0.6014
+NoneType: None
+[2025-02-05 13:33:48.692] Run:2-Epoch:5, ValidLoss:0.6713, ValidAcc:0.6129
+NoneType: None
+[2025-03-02 14:49:11.755] Namespace(dataset_name='ChestXray14', model_name='swin_tiny', init='ImageNet', normalization='imagenet', num_classes=14, output_dir=None, epochs=5, batch_size=24, img_size=224, seed=1234, exp_name='swin_tiny_ImageNet_exper', num_trial=5, device='cpu', train_list='./train_list.txt', val_list='./val_list.txt', test_list='./test_list.txt', in_chans=3, dataset_path='/cabinet/reza/datasets/NIH_Chest_X_rays/images/', valid_start_epoch=79, opt='sgd', lr=0.01, opt_eps=1e-08, opt_betas=None, clip_grad=None, momentum=0.9, weight_decay=0.0, sched='cosine', lr_noise=None, lr_noise_pct=0.67, lr_noise_std=1.0, warmup_lr=1e-06, min_lr=1e-05, decay_epochs=30, warmup_epochs=20, cooldown_epochs=10, decay_rate=0.5, patience=10, plot_path=WindowsPath('Outputs/ChestXray14/swin_tiny_ImageNet_exper/swin_tiny_ImageNet_exper_run_2.pdf'))
+[2025-03-02 14:49:27.567] Run:2-Epoch:1, TrainLoss:0.6784, TrainAcc:0.5914
+NoneType: None
+[2025-03-02 14:49:33.173] Run:2-Epoch:1, ValidLoss:0.6721, ValidAcc:0.6129
+NoneType: None
+[2025-03-02 14:49:49.780] Run:2-Epoch:2, TrainLoss:0.6737, TrainAcc:0.6136
+NoneType: None
+[2025-03-02 14:49:55.555] Run:2-Epoch:2, ValidLoss:0.6720, ValidAcc:0.6129
+NoneType: None
+[2025-03-02 14:50:11.670] Run:2-Epoch:3, TrainLoss:0.6739, TrainAcc:0.6150
+NoneType: None
+[2025-03-02 14:50:17.059] Run:2-Epoch:3, ValidLoss:0.6718, ValidAcc:0.6129
+NoneType: None
+[2025-03-02 14:50:33.970] Run:2-Epoch:4, TrainLoss:0.6720, TrainAcc:0.6093
+NoneType: None
+[2025-03-02 14:50:39.382] Run:2-Epoch:4, ValidLoss:0.6716, ValidAcc:0.6121
+NoneType: None
+[2025-03-02 14:50:56.214] Run:2-Epoch:5, TrainLoss:0.6768, TrainAcc:0.6014
+NoneType: None
+[2025-03-02 14:51:01.674] Run:2-Epoch:5, ValidLoss:0.6713, ValidAcc:0.6129
+NoneType: None
