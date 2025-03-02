@@ -22,11 +22,6 @@ This repository contains the following files and directories:
 - `requirements.txt`: Requirement libraries to use this repo.
 - `.gitignore`: File specifying which files to ignore in version control.
 
-# Updates
-- [x] Create a model's with timm.
-- [x] Create a dataloader for [ChestXray14](https://www.cc.nih.gov/drd/summers.html) and [ChestMNIST](https://medmnist.com/) from the [MedMNIST](https://www.nature.com/articles/s41597-022-01721-8) datasets.
-- [ ] Create a dataloader for [JSRT](http://db.jsrt.or.jp/eng.php) dataset.
-
 ---
 Run scripts as follows:
 
