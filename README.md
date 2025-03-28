@@ -1,28 +1,29 @@
-# Chest Xray Classification Using Swin Transformer
+# CheX-Swin: Chest X-ray Classification Using Swin Transformer
 
-This repo studies the effect of ImageNet pre-training and how far it can extend the applicability of Vision Transformers (ViTs) in the medical domain. To this end, we designed several experiments that utilize different settings and provide the __AUROC__ metric for the `n_trials` of each run.
-
-1. Why __AUROC__? 
-   - Insensitive to class imbalance: AUROC is a useful metric when dealing with imbalanced datasets, where the number of positive and negative instances differs significantly. It focuses on the classifier's ability to rank positive instances higher than negative instances, regardless of the class distribution.
-   - Threshold-independent: AUROC considers the classifier's performance across all possible classification thresholds. It provides a single aggregated measure of performance without requiring a specific threshold selection.
-
-
-
-This repository contains the following files and directories:
-
-- `README.md`: The main README file providing an overview of the repository.
-- Directory containing the source code files.
-  - `train_test.py`: The main Python script for the project.
-  - `experiments.py`: Run all experiments at once.
-  - `utils.py`: Utility functions used by the main script.
-  - `models.py`: Creates the model by using the [timm module](https://timm.fast.ai/).
-  - `dataloader.py`: Dataloader scripts for diverse Chest X-ray datasets.
-  - `medmnist_test.py`: Test script with ChestMNIST dataset, equivalent to ChestXray14, to lessen the GPU needs while developing code.
-- `requirements.txt`: Requirement libraries to use this repo.
-- `.gitignore`: File specifying which files to ignore in version control.
+CheX-Swin is a deep learning framework for chest X-ray image classification, leveraging the power of Swin Transformers and other state-of-the-art architectures. This repository provides scripts for training, testing, and experimenting with various models and datasets.
 
 ---
-Run scripts as follows:
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/NickDiSanto/CheX-Swin.git
+   cd CheX-Swin
+   ```
+
+2. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+---
+
+## Usage
+
+### Running Experiments
+
+To run experiments with the specified dataset and hyperparameters, use the following command:
 
 ```bash
 python experiments.py \
@@ -30,10 +31,12 @@ python experiments.py \
 --dataset_path /path/to/dataset \
 --batch_size 24 \
 --epochs 100 \
---num_trial 5 \
---in_chans 3 \
+--num_trial 1
 ```
----
+
+### Training and Testing
+
+To train and test a model, use the `train_test.py` script:
 
 ```bash
 python train_test.py \
@@ -50,3 +53,54 @@ python train_test.py \
 --val_list ./Xray14_val_official.txt \
 --test_list ./Xray14_test_official.txt
 ```
+
+---
+
+## Arguments
+
+### Common Arguments
+
+- `--dataset_name`: Name of the dataset (e.g., `ChestXray14`).
+- `--dataset_path`: Path to the dataset directory.
+- `--batch_size`: Batch size for training and testing.
+- `--epochs`: Number of training epochs.
+- `--num_trial`: Number of trials for the experiment.
+
+### Training-Specific Arguments
+
+- `--model_name`: Model architecture to use (e.g., `resnet18`, `swin_transformer`).
+- `--normalization`: Normalization method (e.g., `imagenet`).
+- `--lr`: Learning rate for the optimizer.
+- `--in_chans`: Number of input channels (e.g., `3` for RGB images).
+- `--train_list`, `--val_list`, `--test_list`: File paths for train, validation, and test splits.
+
+---
+
+## Dataset Preparation
+
+Ensure your dataset is organized as follows:
+
+```
+/path/to/dataset/
+├── images/
+│   ├── image1.png
+│   ├── image2.png
+│   └── ...
+├── Xray14_train_official.txt
+├── Xray14_val_official.txt
+└── Xray14_test_official.txt
+```
+
+The `.txt` files should contain the paths to the images and their corresponding labels.
+
+---
+
+## Results
+
+After training, results such as accuracy, loss, and model checkpoints will be saved in the output directory. You can customize the output path in the scripts.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

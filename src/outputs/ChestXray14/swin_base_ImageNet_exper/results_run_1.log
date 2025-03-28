@@ -1,0 +1,76 @@
+[2025-03-06 20:23:41.405] swin_base_ImageNet_exper_run_1: ACC_ClassWise = [0.81	0.95	0.88	0.75	0.9 	0.86	1.  	0.95	0.96	0.98	0.93	0.97	0.95	1.  ]
+
+[2025-03-06 20:23:41.406] swin_base_ImageNet_exper_run_1: ACC_All_Classes = 0.9207
+
+[2025-03-06 20:23:41.415] swin_base_ImageNet_exper_run_1: AUC_ClassWise = [0.6578	0.9592	0.6042	0.4737	0.5272	0.3071	0.    	0.4021	0.3906	0.7653
+ 0.6267	0.5636	0.7453	0.    ]
+
+[2025-03-06 20:23:41.415] swin_base_ImageNet_exper_run_1: AUC_All_Classes = 0.5016
+
+[2025-03-06 20:23:41.415] All trials on all classes: ACC  = [0.9207]
+
+[2025-03-06 20:23:41.415] Mean ACC over All trials = 0.9207
+
+[2025-03-06 20:23:41.415] ACC_STD over All trials:  = 0.0000
+
+[2025-03-06 20:23:41.415] All trials on all classes: AUC  = [0.5016]
+
+[2025-03-06 20:23:41.415] Mean AUC over All trials = 0.5016
+
+[2025-03-06 20:23:41.415] AUC_STD over All trials:  = 0.0000
+
+[2025-03-06 20:38:02.315] swin_base_ImageNet_exper_run_1: ACC_ClassWise = [0.89	0.98	0.87	0.81	0.92	0.92	1.  	0.95	0.96	0.98	0.93	0.97	0.95	1.  ]
+
+[2025-03-06 20:38:02.315] swin_base_ImageNet_exper_run_1: ACC_All_Classes = 0.9379
+
+[2025-03-06 20:38:02.323] swin_base_ImageNet_exper_run_1: AUC_ClassWise = [0.7579	0.5357	0.5076	0.6017	0.4266	0.4334	0.    	0.5242	0.5234	0.6122
+ 0.5223	0.4811	0.5747	0.    ]
+
+[2025-03-06 20:38:02.323] swin_base_ImageNet_exper_run_1: AUC_All_Classes = 0.4644
+
+[2025-03-06 20:38:02.323] All trials on all classes: ACC  = [0.9379]
+
+[2025-03-06 20:38:02.324] Mean ACC over All trials = 0.9379
+
+[2025-03-06 20:38:02.324] ACC_STD over All trials:  = 0.0000
+
+[2025-03-06 20:38:02.324] All trials on all classes: AUC  = [0.4644]
+
+[2025-03-06 20:38:02.324] Mean AUC over All trials = 0.4644
+
+[2025-03-06 20:38:02.324] AUC_STD over All trials:  = 0.0000
+
+[2025-03-07 18:05:37.905] swin_base_ImageNet_exper_run_1: ACC_ClassWise = [0.8914	0.9741	0.8802	0.822 	0.9493	0.9409	0.9892	0.9509	0.9573	0.9816
+ 0.9773	0.9838	0.9673	0.9981]
+
+[2025-03-07 18:05:37.905] swin_base_ImageNet_exper_run_1: ACC_All_Classes = 0.9474
+
+[2025-03-07 18:05:37.917] swin_base_ImageNet_exper_run_1: AUC_ClassWise = [0.7785	0.7714	0.8528	0.689 	0.7255	0.7122	0.7139	0.8331	0.7824	0.8649
+ 0.8552	0.7744	0.741 	0.7956]
+
+[2025-03-07 18:05:37.917] swin_base_ImageNet_exper_run_1: AUC_All_Classes = 0.7778
+
+[2025-03-07 18:05:37.917] All trials on all classes: ACC  = [0.9474]
+
+[2025-03-07 18:05:37.917] Mean ACC over All trials = 0.9474
+
+[2025-03-07 18:05:37.917] ACC_STD over All trials:  = 0.0000
+
+[2025-03-07 18:05:37.917] All trials on all classes: AUC  = [0.7778]
+
+[2025-03-07 18:05:37.917] Mean AUC over All trials = 0.7778
+
+[2025-03-07 18:05:37.917] AUC_STD over All trials:  = 0.0000
+
+[2025-03-28 00:50:34.109] swin_base_ImageNet_exper_run_1: ACC_ClassWise = [0.8915	0.9741	0.8845	0.8213	0.9497	0.9408	0.9892	0.9502	0.9573	0.9816
+ 0.9776	0.9839	0.9673	0.9981]
+[2025-03-28 00:50:34.109] swin_base_ImageNet_exper_run_1: ACC_All_Classes = 0.9476
+[2025-03-28 00:50:34.120] swin_base_ImageNet_exper_run_1: AUC_ClassWise = [0.7836,0.7883,0.8513,0.6885,0.7244,0.7035,0.7243,0.8334,0.7748,0.8672,
+ 0.8524,0.786 ,0.7305,0.8344]
+[2025-03-28 00:50:34.120] swin_base_ImageNet_exper_run_1: AUC_All_Classes = 0.7816
+[2025-03-28 00:50:34.120] All trials on all classes: ACC = [0.9476]
+[2025-03-28 00:50:34.120] Mean ACC over All trials = 0.9476
+[2025-03-28 00:50:34.120] ACC_STD over All trials:  = 0.0000
+[2025-03-28 00:50:34.120] All trials on all classes: AUC = [0.7816]
+[2025-03-28 00:50:34.120] Mean AUC over All trials = 0.7816
+[2025-03-28 00:50:34.120] AUC_STD over All trials:  = 0.0000
