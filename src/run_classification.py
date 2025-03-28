@@ -13,6 +13,7 @@ from timm.optim import create_optimizer
 from torchmetrics.classification import MultilabelAccuracy
 from torchmetrics.functional.classification import multilabel_auroc
 from tqdm import tqdm
+from sklearn.metrics import f1_score, average_precision_score, precision_recall_curve
 
 from models import build_model
 from utils import (
@@ -22,6 +23,27 @@ from utils import (
     plot_performance,
     test_classification,
 )
+
+
+class FocalLoss(nn.Module):
+    def __init__(self, alpha=1.0, gamma=2.0, reduction='mean'):
+        super(FocalLoss, self).__init__()
+        self.alpha = alpha
+        self.gamma = gamma
+        self.reduction = reduction
+        self.bce = nn.BCEWithLogitsLoss(reduction='none')
+
+    def forward(self, inputs, targets):
+        BCE_loss = self.bce(inputs, targets)
+        pt = torch.exp(-BCE_loss)
+        focal_loss = self.alpha * (1 - pt) ** self.gamma * BCE_loss
+
+        if self.reduction == 'mean':
+            return focal_loss.mean()
+        elif self.reduction == 'sum':
+            return focal_loss.sum()
+        else:
+            return focal_loss
 
 
 def run_experiments(args, train_loader, val_loader, test_loader, model_path, output_path):
@@ -34,8 +56,11 @@ def run_experiments(args, train_loader, val_loader, test_loader, model_path, out
         model = build_model(args).to(args.device)
         optimizer = create_optimizer(args, model)
         lr_scheduler, _ = create_scheduler(args, optimizer)
-        loss_fn = nn.BCEWithLogitsLoss()
-
+        if args.loss_type == "focal":
+            loss_fn = FocalLoss(alpha=1.0, gamma=2.0)
+        else:
+            loss_fn = nn.BCEWithLogitsLoss()
+        
         print(f"Run: {idx + 1}\nStarting training...")
         experiment = f"{args.exp_name}_run_{idx + 1}"
         save_model_path = model_path / experiment
@@ -95,6 +120,7 @@ def run_experiments(args, train_loader, val_loader, test_loader, model_path, out
                 patience_counter += 1
 
             epoch_counter += 1
+            lr_scheduler.step(epoch)
 
             # Early stopping
             if patience_counter > args.patience:
@@ -165,6 +191,43 @@ def run_experiments(args, train_loader, val_loader, test_loader, model_path, out
         )
         logger2.info(f"{experiment}: AUC_All_Classes = {auroc_mean:.4f}")
 
+        # F1 Score and PR AUC
+        y_true = y_test.cpu().numpy()
+        y_prob = p_test.cpu().numpy()
+        y_pred = (y_prob > 0.5).astype(int)
+
+        f1_per_class = []
+        pr_auc_per_class = []
+
+        for i in range(args.num_classes):
+            f1 = f1_score(y_true[:, i], y_pred[:, i], zero_division=0)
+            f1_per_class.append(f1)
+            try:
+                precision, recall, _ = precision_recall_curve(y_true[:, i], y_prob[:, i])
+                pr_auc = np.trapz(recall, precision)
+            except ValueError:
+                pr_auc = 0.0
+
+            pr_auc_per_class.append(pr_auc)
+
+        log_and_print_metrics(
+            logger2,
+            experiment,
+            "F1_ClassWise",
+            np.array(f1_per_class),
+            precision=4,
+            separator=","
+        )
+
+        log_and_print_metrics(
+            logger2,
+            experiment,
+            "PR_AUC_ClassWise",
+            np.array(pr_auc_per_class),
+            precision=4,
+            separator=","
+        )
+
         accuracy.append(acc.tolist())
         mean_auc_all_runs.append(auroc_mean.tolist())
 
@@ -188,12 +251,6 @@ def setup_logger(name, log_file):
 
 
 def close_logger(logger):
-    """
-    Close all handlers of a logger.
-
-    Args:
-        logger (logging.Logger): Logger to close.
-    """
     for handler in logger.handlers:
         handler.close()
         logger.removeHandler(handler)

@@ -44,13 +44,17 @@ def my_transform(normalize, crop_size=224, resize=224, mode="train", test_augmen
     if mode == "train":
         transformations.extend([
             T.Grayscale(num_output_channels=3),
-            T.Resize((resize, resize)),
+            T.RandomResizedCrop(resize, scale=(0.8, 1.0)),
             T.RandomHorizontalFlip(),
-            T.RandomRotation(7),
+            T.RandomRotation(degrees=10),
+            T.ColorJitter(brightness=0.1, contrast=0.1),
+            T.RandomAffine(degrees=10, translate=(0.05, 0.05)),
+            T.GaussianBlur(kernel_size=3, sigma=(0.1, 2.0)),
             T.ToTensor()
         ])
         if normalize:
             transformations.append(normalize)
+
     elif mode == "val":
         transformations.extend([
             T.Grayscale(num_output_channels=3),
