@@ -1,19 +1,16 @@
-import argparse
 import logging
-import os
-import sys
-from pathlib import Path
-
 import numpy as np
-import pandas as pd
+import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
+import cv2
+
 from timm.scheduler import create_scheduler
 from timm.optim import create_optimizer
 from torchmetrics.classification import MultilabelAccuracy
 from torchmetrics.functional.classification import multilabel_auroc
-from tqdm import tqdm
-from sklearn.metrics import f1_score, average_precision_score, precision_recall_curve
+from torchvision.transforms.functional import to_pil_image
+from sklearn.metrics import f1_score, precision_recall_curve, auc, multilabel_confusion_matrix
 
 from models import build_model
 from utils import (
@@ -24,6 +21,76 @@ from utils import (
     test_classification,
 )
 
+
+class GradCAM:
+    def __init__(self, model, target_layer):
+        self.model = model
+        self.target_layer = target_layer
+        self.gradients = None
+        self.activations = None
+
+        # Hook to capture gradients and activations
+        self.target_layer.register_forward_hook(self.save_activations)
+        self.target_layer.register_full_backward_hook(self.save_gradients)
+        # self
+
+    def save_activations(self, module, input, output):
+        self.activations = output.detach().clone()  # <== Clone to avoid view-related issues
+
+    def save_gradients(self, module, grad_input, grad_output):
+        self.gradients = grad_output[0].detach().clone()  # <== Clone to prevent view/in-place error
+
+    def generate_cam(self, input_tensor, target_class):
+        # Forward pass
+        self.model.eval()
+        output = self.model(input_tensor)
+
+        # Backward pass for the target class
+        self.model.zero_grad()
+        target = output[:, target_class]  # Select the score for the target class
+        target = target.sum()  # Ensure the target is a scalar
+        target.backward()
+
+        # Compute Grad-CAM
+        gradients = self.gradients.cpu().data.numpy()
+        activations = self.activations.cpu().data.numpy()
+        weights = np.mean(gradients, axis=(2, 3))  # Global average pooling
+        cam = np.sum(weights[:, :, np.newaxis, np.newaxis] * activations, axis=1)
+        cam = np.maximum(cam, 0)  # ReLU
+        cam = cam[0]  # Remove batch dimension
+
+        # Normalize CAM
+        cam = cam - np.min(cam)
+        cam = cam / np.max(cam)
+
+        if np.max(cam) > 0:
+            cam = cam / np.max(cam)
+        else:
+            print("Warning: CAM output is all zeros.")
+            cam = np.zeros_like(cam)
+
+        return cam
+
+    def visualize(self, input_image, cam, alpha=0.5, save_path=None):
+        # Resize CAM to match the input image size
+        cam_resized = cv2.resize(cam, (input_image.shape[2], input_image.shape[1]))  # Resize to (width, height)
+
+        # Convert CAM to heatmap
+        heatmap = plt.cm.jet(cam_resized)[..., :3]  # Use jet colormap
+        heatmap = np.uint8(255 * heatmap)
+
+        # Overlay heatmap on the original image
+        input_image = np.array(to_pil_image(input_image.cpu().squeeze()))
+        overlay = np.uint8(alpha * heatmap + (1 - alpha) * input_image)
+
+        # Save or display the result
+        if save_path:
+            plt.imsave(save_path, overlay)
+        else:
+            plt.figure(figsize=(8, 8))
+            plt.imshow(overlay)
+            plt.axis("off")
+            plt.show()
 
 class FocalLoss(nn.Module):
     def __init__(self, alpha=1.0, gamma=2.0, reduction='mean'):
@@ -45,6 +112,13 @@ class FocalLoss(nn.Module):
         else:
             return focal_loss
 
+def remove_inplace_relu(module):
+    for name, child in module.named_children():
+        if isinstance(child, nn.ReLU) and child.inplace:
+            setattr(module, name, nn.ReLU(inplace=False))
+        else:
+            remove_inplace_relu(child)
+
 
 def run_experiments(args, train_loader, val_loader, test_loader, model_path, output_path):
 
@@ -54,7 +128,11 @@ def run_experiments(args, train_loader, val_loader, test_loader, model_path, out
     for idx in range(args.num_trial):
         torch.cuda.empty_cache()
         model = build_model(args).to(args.device)
-        optimizer = create_optimizer(args, model)
+        remove_inplace_relu(model)
+        if args.opt == "adam":
+            optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+        elif args.opt == "sgd":
+            optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
         lr_scheduler, _ = create_scheduler(args, optimizer)
         if args.loss_type == "focal":
             loss_fn = FocalLoss(alpha=1.0, gamma=2.0)
@@ -157,11 +235,14 @@ def run_experiments(args, train_loader, val_loader, test_loader, model_path, out
         individual_acc = mla_acc_indv(p_test, y_test_int).cpu().numpy()
         acc = mla_acc(p_test, y_test_int).cpu().numpy()
 
+        class_labels = args.class_labels if hasattr(args, "class_labels") else [f"Class {i}" for i in range(args.num_classes)]
+
         log_and_print_metrics(
             logger2,
             experiment,
             "ACC_ClassWise",
             individual_acc,
+            class_labels=class_labels,
             precision=4,
             separator="\t",
         )
@@ -198,6 +279,49 @@ def run_experiments(args, train_loader, val_loader, test_loader, model_path, out
 
         f1_per_class = []
         pr_auc_per_class = []
+
+
+        # Compute macro-average F1 score
+        f1_macro = f1_score(y_true, y_pred, average="macro", zero_division=0)
+
+        # Compute macro-average PR AUC
+        precision_macro, recall_macro, _ = precision_recall_curve(y_true.ravel(), y_prob.ravel())
+        pr_auc_macro = auc(recall_macro, precision_macro)
+
+        log_and_print_metrics(
+            logger2,
+            experiment,
+            "F1_Macro",
+            np.array([f1_macro]),
+            precision=4,
+            separator=","
+        )
+
+        log_and_print_metrics(
+            logger2,
+            experiment,
+            "PR_AUC_Macro",
+            np.array([pr_auc_macro]),
+            precision=4,
+            separator=","
+        )
+
+
+        # Compute multilabel confusion matrix (shape: [num_classes, 2, 2])
+        conf_matrices = multilabel_confusion_matrix(y_true, y_pred)
+
+        # Log class-wise confusion matrices
+        for i, cm in enumerate(conf_matrices):
+            label_name = class_labels[i] if class_labels else f"Class_{i}"
+            logger2.info(f"{experiment}: ConfusionMatrix_{label_name} =\n{cm}")
+            print(f">>{experiment}: ConfusionMatrix_{label_name} =\n{cm}")
+
+        # Sum across all class confusion matrices
+        overall_cm = np.sum(conf_matrices, axis=0)
+
+        logger2.info(f"{experiment}: ConfusionMatrix_Overall =\n{overall_cm}")
+        print(f">>{experiment}: ConfusionMatrix_Overall =\n{overall_cm}")
+
 
         for i in range(args.num_classes):
             f1 = f1_score(y_true[:, i], y_pred[:, i], zero_division=0)
@@ -238,6 +362,63 @@ def run_experiments(args, train_loader, val_loader, test_loader, model_path, out
     close_logger(logger2)
 
 
+    data_iter = iter(test_loader)
+    images, labels = next(data_iter)
+
+    # Move data to the appropriate device
+    images = images.to(args.device)
+    labels = labels.to(args.device)
+
+    # --- Grad-CAM target layer selector ---
+    target_layer = None
+    if hasattr(model, "features"):  # VGG
+        # Avoid ReLU or pooling layers
+        for layer in reversed(model.features):
+            if isinstance(layer, nn.Conv2d):
+                target_layer = layer
+                break
+
+    elif hasattr(model, "layer4"):  # ResNet
+        target_layer = list(model.layer4.children())[-1].conv2
+
+    elif hasattr(model, "stages"):  # Swin Transformer (may not work for all variants)
+        try:
+            from timm.models.swin_transformer import SwinTransformerBlock
+            for block in reversed(model.stages[-1]):
+                if isinstance(block, SwinTransformerBlock):
+                    target_layer = block.norm1  # You can also try block.attn
+                    break
+        except Exception:
+            pass
+
+    # Fallback for Swin models using different structure
+    if target_layer is None and "swin" in args.model_name.lower():
+        for name, module in model.named_modules():
+            if isinstance(module, nn.LayerNorm):
+                target_layer = module  # Pick last one
+        if target_layer is None:
+            raise ValueError("Could not find suitable target_layer in Swin for Grad-CAM.")
+
+    if target_layer is None:
+        raise ValueError("Unsupported model architecture for Grad-CAM.")
+
+
+    # Initialize Grad-CAM and generate the CAM
+    gradcam = GradCAM(model, target_layer)
+    cam = gradcam.generate_cam(images, target_class=0)  # Change target_class as needed
+    # gradcam.visualize(images[0], cam)
+
+    # Generate a unique file name for the Grad-CAM output
+    model_name = args.model_name if hasattr(args, "model_name") else "model"
+    experiment_name = args.exp_name if hasattr(args, "exp_name") else "experiment"
+    run_index = idx + 1
+    save_path = output_path / f"{model_name}_{experiment_name}_run_{run_index}_gradcam.png"
+
+    # Save the Grad-CAM visualization
+    gradcam.visualize(images[0], cam, save_path=str(save_path))
+
+    
+
 def setup_logger(name, log_file):
     logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
@@ -256,10 +437,17 @@ def close_logger(logger):
         logger.removeHandler(handler)
 
 
-def log_and_print_metrics(logger, experiment, metric_name, values, **kwargs):
-    formatted_values = np.array2string(values, **kwargs)
-    print(f">>{experiment}: {metric_name} = {formatted_values}")
-    logger.info(f"{experiment}: {metric_name} = {formatted_values}")
+def log_and_print_metrics(logger, experiment, metric_name, values, class_labels=None, **kwargs):
+    if class_labels and metric_name == "ACC_ClassWise":
+        print(f">>{experiment}: {metric_name}")
+        logger.info(f"{experiment}: {metric_name}")
+        for label, value in zip(class_labels, values):
+            print(f"  {label}: {value:.4f}")
+            logger.info(f"  {label}: {value:.4f}")
+    else:
+        formatted_values = np.array2string(values, **kwargs)
+        print(f">>{experiment}: {metric_name} = {formatted_values}")
+        logger.info(f"{experiment}: {metric_name} = {formatted_values}")
 
 
 def log_final_metrics(logger, metric_name, values):

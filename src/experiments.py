@@ -1,9 +1,8 @@
 import argparse
 from pathlib import Path
 
-import numpy as np
 import torch
-from torch.utils.data import DataLoader, WeightedRandomSampler
+from torch.utils.data import random_split, DataLoader, WeightedRandomSampler
 from medmnist import ChestMNIST
 
 from run_classification import run_experiments
@@ -15,13 +14,12 @@ def parse_arguments():
     
     # Dataset and model parameters
     parser.add_argument("--dataset_name", type=str, default="ChestXray14", help="Dataset name")
-    parser.add_argument("--model_name", type=str, default="resnet18", help="Model name: swin_base|resnet50")
+    parser.add_argument("--model_name", type=str, default="resnet18", help="Model name: swin_base|resnet18")
     parser.add_argument("--init", type=str, default="ImageNet", help="Initialization weights")
     parser.add_argument("--normalization", type=str, default="imagenet", help="Normalization type")
     parser.add_argument("--num_classes", type=int, default=14, help="Number of output classes")
     parser.add_argument("--in_chans", type=int, default=3, help="Number of input channels")
     parser.add_argument("--img_size", type=int, default=224, help="Input image size")
-    parser.add_argument("--dataset_path", type=str, default="/cabinet/reza/datasets/NIH_Chest_X_rays/images/", help="Path to the dataset")
 
     # Training parameters
     parser.add_argument("--epochs", type=int, default=40, help="Number of training epochs")
@@ -29,12 +27,11 @@ def parse_arguments():
     parser.add_argument("--seed", type=int, default=1234, help="Random seed")
     parser.add_argument("--num_trial", type=int, default=1, help="Number of trials")
     parser.add_argument("--device", type=str, default="cuda", help="Device to use: cpu|cuda")
-    parser.add_argument("--valid_start_epoch", type=int, default=79, help="Epoch to start validation")
     parser.add_argument("--patience", type=int, default=10, help="Early stopping patience")
 
     # Optimizer parameters
     parser.add_argument('--loss_type', type=str, default='bce', choices=['bce', 'focal'], help='Loss function type')
-    parser.add_argument("--opt", type=str, default="sgd", help="Optimizer type")
+    parser.add_argument("--opt", type=str, default="sgd", choices=["sgd", "adam"], help="Optimizer type")
     parser.add_argument("--lr", type=float, default=1e-2, help="Learning rate")
     parser.add_argument("--momentum", type=float, default=0.9, help="Momentum for SGD")
     parser.add_argument("--weight_decay", type=float, default=0.0, help="Weight decay")
@@ -84,7 +81,8 @@ def main():
         print_class_distribution(test_set, "test_set", class_names)
         
         # Use a subset of the dataset for quick experimentation
-        # subset_size = 100
+        # subset_size = 500
+        # subset_size = 2000
         # train_set, _ = random_split(train_set, [subset_size, len(train_set) - subset_size])
         # val_set, _ = random_split(val_set, [subset_size, len(val_set) - subset_size])
         # test_set, _ = random_split(test_set, [subset_size, len(test_set) - subset_size])
@@ -119,21 +117,20 @@ def main():
             prefetch_factor=1,
             persistent_workers=True
         )
-
-        # train_loader = DataLoader(dataset=train_set, batch_size=24, shuffle=True)
-        # val_loader = DataLoader(dataset=val_set, batch_size=24, shuffle=False)
-        # test_loader = DataLoader(dataset=test_set, batch_size=24, shuffle=False)
         
-        model_names = ["resnet50", "swin_base"]
+        model_names = ["vgg19", "resnet18", "swin_base"]
+        # model_names = ["vgg19"]
         # model_names = ["swin_base"]
-        
-        for model in model_names:
-            for weights in args.init:
-                args.model_name = model
-                args.weights = weights
-                print(f"\nRunning model {args.model_name} with {args.weights} weights and {args.loss_type} loss.\n")
+        # model_names = ["resnet18"]
+        init_weights = ["ImageNet"]
 
-                args.exp_name = f"{args.model_name}_{args.weights}_{args.exp_name}"
+        for model in model_names:
+            for weights in init_weights:
+                args.model_name = model
+                args.init = weights
+                print(f"\nRunning model {args.model_name} with {args.init} weights and {args.loss_type} loss.\n")
+
+                args.exp_name = f"{args.model_name}_{args.init}_{args.exp_name}"
                 model_path = Path("./models") / args.dataset_name / args.exp_name
                 output_path = Path("./outputs") / args.dataset_name / args.exp_name
                 model_path.mkdir(parents=True, exist_ok=True)
@@ -157,7 +154,12 @@ def print_class_distribution(dataset, set_name, class_names):
 
 
 def get_sampler(train_set):
-    targets = train_set.labels  # Direct access, no loading overhead
+    # If train_set is a Subset, access the original dataset and use the indices
+    if isinstance(train_set, torch.utils.data.Subset):
+        targets = train_set.dataset.labels[train_set.indices]
+    else:
+        targets = train_set.labels  # Direct access if it's not a Subset
+
     class_freq = targets.sum(axis=0)
     class_weights = 1.0 / (class_freq + 1e-6)
     sample_weights = (targets * class_weights).sum(axis=1)

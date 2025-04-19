@@ -7,8 +7,9 @@ def build_model(args):
 
     model_map = {
         "resnet18": args.model_name,
-        "resnet50": args.model_name,
-        "swin_tiny": "swin_tiny_patch4_window7_224",
+        # "resnet50": args.model_name,
+        "vgg19": "vgg19",
+        # "swin_tiny": "swin_tiny_patch4_window7_224",
         "swin_base": "swin_base_patch4_window7_224",
     }
 
