@@ -332,3 +332,79 @@
 [2025-04-19 04:20:31.772] All trials on all classes: AUC = [0.7419]
 [2025-04-19 04:20:31.772] Mean AUC over All trials = 0.7419
 [2025-04-19 04:20:31.772] AUC_STD over All trials:  = 0.0000
+[2025-04-24 01:21:18.672] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ACC_ClassWise
+[2025-04-24 01:21:18.672]   Class 0: 0.8743
+[2025-04-24 01:21:18.672]   Class 1: 0.9748
+[2025-04-24 01:21:18.672]   Class 2: 0.8367
+[2025-04-24 01:21:18.672]   Class 3: 0.8089
+[2025-04-24 01:21:18.672]   Class 4: 0.9476
+[2025-04-24 01:21:18.672]   Class 5: 0.9387
+[2025-04-24 01:21:18.672]   Class 6: 0.9892
+[2025-04-24 01:21:18.672]   Class 7: 0.9508
+[2025-04-24 01:21:18.672]   Class 8: 0.9575
+[2025-04-24 01:21:18.672]   Class 9: 0.9802
+[2025-04-24 01:21:18.672]   Class 10: 0.9783
+[2025-04-24 01:21:18.672]   Class 11: 0.9829
+[2025-04-24 01:21:18.672]   Class 12: 0.9665
+[2025-04-24 01:21:18.672]   Class 13: 0.9978
+[2025-04-24 01:21:18.672] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ACC_All_Classes = 0.9417
+[2025-04-24 01:21:18.682] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: AUC_ClassWise = [0.6845,0.6373,0.7874,0.6401,0.631 ,0.5649,0.6584,0.7221,0.6649,0.8317,
+ 0.7456,0.6703,0.6316,0.7013]
+[2025-04-24 01:21:18.682] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: AUC_All_Classes = 0.6837
+[2025-04-24 01:21:18.700] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: F1_Macro = [0.0493]
+[2025-04-24 01:21:18.700] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: PR_AUC_Macro = [0.2038]
+[2025-04-24 01:21:18.703] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 0 =
+[[8645  265]
+ [ 992   98]]
+[2025-04-24 01:21:18.703] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 1 =
+[[9748    0]
+ [ 252    0]]
+[2025-04-24 01:21:18.703] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 2 =
+[[7846  904]
+ [ 729  521]]
+[2025-04-24 01:21:18.703] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 3 =
+[[7899  328]
+ [1583  190]]
+[2025-04-24 01:21:18.703] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 4 =
+[[9476    0]
+ [ 524    0]]
+[2025-04-24 01:21:18.703] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 5 =
+[[9387    0]
+ [ 613    0]]
+[2025-04-24 01:21:18.703] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 6 =
+[[9892    0]
+ [ 108    0]]
+[2025-04-24 01:21:18.703] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 7 =
+[[9508    2]
+ [ 490    0]]
+[2025-04-24 01:21:18.703] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 8 =
+[[9575    0]
+ [ 425    0]]
+[2025-04-24 01:21:18.703] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 9 =
+[[9802   23]
+ [ 175    0]]
+[2025-04-24 01:21:18.704] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 10 =
+[[9783    0]
+ [ 217    0]]
+[2025-04-24 01:21:18.704] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 11 =
+[[9829    0]
+ [ 171    0]]
+[2025-04-24 01:21:18.704] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 12 =
+[[9665    0]
+ [ 335    0]]
+[2025-04-24 01:21:18.704] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 13 =
+[[9978    4]
+ [  18    0]]
+[2025-04-24 01:21:18.704] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: ConfusionMatrix_Overall =
+[[131033   1526]
+ [  6632    809]]
+[2025-04-24 01:21:18.732] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: F1_ClassWise = [0.1349,0.    ,0.3895,0.1659,0.    ,0.    ,0.    ,0.    ,0.    ,0.    ,
+ 0.    ,0.    ,0.    ,0.    ]
+[2025-04-24 01:21:18.732] resnet18_ImageNet_vgg19_ImageNet_exper_run_1: PR_AUC_ClassWise = [0.0848,0.0096,0.2295,0.1015,0.0407,0.0215,0.0142,0.0901,0.0236,0.0518,
+ 0.0773,0.0131,0.0246,0.0018]
+[2025-04-24 01:21:18.733] All trials on all classes: ACC = [0.9417]
+[2025-04-24 01:21:18.733] Mean ACC over All trials = 0.9417
+[2025-04-24 01:21:18.733] ACC_STD over All trials:  = 0.0000
+[2025-04-24 01:21:18.733] All trials on all classes: AUC = [0.6837]
+[2025-04-24 01:21:18.733] Mean AUC over All trials = 0.6837
+[2025-04-24 01:21:18.733] AUC_STD over All trials:  = 0.0000

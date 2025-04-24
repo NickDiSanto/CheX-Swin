@@ -667,3 +667,20 @@
 [2025-04-19 04:03:06.213] Run:1-Epoch:12, ValidLoss:0.0578, ValidAcc:0.9391
 [2025-04-19 04:06:50.712] Run:1-Epoch:13, TrainLoss:0.0967, TrainAcc:0.8559
 [2025-04-19 04:07:00.912] Run:1-Epoch:13, ValidLoss:0.0630, ValidAcc:0.9481
+[2025-04-24 01:14:04.747] Namespace(dataset_name='ChestXray14', model_name='vgg19', init='ImageNet', normalization='imagenet', num_classes=14, in_chans=3, img_size=224, epochs=8, batch_size=128, seed=1234, num_trial=1, device='cuda', patience=10, loss_type='bce', opt='adamw', lr=0.001, momentum=0.9, weight_decay=0.0, clip_grad=None, num_workers=4, sched='cosine', warmup_lr=1e-06, min_lr=1e-05, warmup_epochs=20, cooldown_epochs=10, decay_epochs=30.0, decay_rate=0.5, output_dir=None, exp_name='vgg19_ImageNet_exper', weights='ImageNet', plot_path=PosixPath('outputs/ChestXray14/vgg19_ImageNet_exper/vgg19_ImageNet_exper_run_1.pdf'))
+[2025-04-24 01:14:34.650] Run:1-Epoch:1, TrainLoss:0.5518, TrainAcc:0.7776
+[2025-04-24 01:14:44.372] Run:1-Epoch:1, ValidLoss:0.2879, ValidAcc:0.9428
+[2025-04-24 01:15:16.655] Run:1-Epoch:2, TrainLoss:0.3999, TrainAcc:0.8563
+[2025-04-24 01:15:26.312] Run:1-Epoch:2, ValidLoss:0.2126, ValidAcc:0.9486
+[2025-04-24 01:15:59.743] Run:1-Epoch:3, TrainLoss:0.3659, TrainAcc:0.8582
+[2025-04-24 01:16:09.552] Run:1-Epoch:3, ValidLoss:0.2634, ValidAcc:0.9213
+[2025-04-24 01:16:41.136] Run:1-Epoch:4, TrainLoss:0.3321, TrainAcc:0.8654
+[2025-04-24 01:16:51.015] Run:1-Epoch:4, ValidLoss:0.2286, ValidAcc:0.9194
+[2025-04-24 01:17:22.751] Run:1-Epoch:5, TrainLoss:0.2971, TrainAcc:0.8782
+[2025-04-24 01:17:32.602] Run:1-Epoch:5, ValidLoss:0.2344, ValidAcc:0.9241
+[2025-04-24 01:18:04.182] Run:1-Epoch:6, TrainLoss:0.2645, TrainAcc:0.8916
+[2025-04-24 01:18:14.052] Run:1-Epoch:6, ValidLoss:0.2770, ValidAcc:0.8940
+[2025-04-24 01:18:45.479] Run:1-Epoch:7, TrainLoss:0.2510, TrainAcc:0.8968
+[2025-04-24 01:18:55.266] Run:1-Epoch:7, ValidLoss:0.2293, ValidAcc:0.9229
+[2025-04-24 01:19:26.639] Run:1-Epoch:8, TrainLoss:0.2095, TrainAcc:0.9146
+[2025-04-24 01:19:36.361] Run:1-Epoch:8, ValidLoss:0.2369, ValidAcc:0.9165

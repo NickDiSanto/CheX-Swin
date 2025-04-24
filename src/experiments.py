@@ -27,7 +27,7 @@ def parse_arguments():
     parser.add_argument("--seed", type=int, default=1234, help="Random seed")
     parser.add_argument("--num_trial", type=int, default=1, help="Number of trials")
     parser.add_argument("--device", type=str, default="cuda", help="Device to use: cpu|cuda")
-    parser.add_argument("--patience", type=int, default=10, help="Early stopping patience")
+    parser.add_argument("--patience", type=int, default=5, help="Early stopping patience")
 
     # Optimizer parameters
     parser.add_argument('--loss_type', type=str, default='bce', choices=['bce', 'focal'], help='Loss function type')
@@ -83,10 +83,10 @@ def main():
         
         # Use a subset of the dataset for quick experimentation
         # subset_size = 500
-        subset_size = 10000
-        train_set, _ = random_split(train_set, [subset_size, len(train_set) - subset_size])
-        val_set, _ = random_split(val_set, [subset_size, len(val_set) - subset_size])
-        test_set, _ = random_split(test_set, [subset_size, len(test_set) - subset_size])
+        # subset_size = 10000
+        # train_set, _ = random_split(train_set, [subset_size, len(train_set) - subset_size])
+        # val_set, _ = random_split(val_set, [subset_size, len(val_set) - subset_size])
+        # test_set, _ = random_split(test_set, [subset_size, len(test_set) - subset_size])
 
         train_loader = DataLoader(
             dataset=train_set,
@@ -126,10 +126,14 @@ def main():
 
         for model in model_names:
             args.model_name = model
-            args.init = "ImageNet"
-            print(f"\nRunning model {args.model_name} with {args.init} weights and {args.loss_type} loss.\n")
+            # args.init = "ImageNet"
+            args.weights = "ImageNet"
+            # print(f"\nRunning model {args.model_name} with {args.init} weights and {args.loss_type} loss.\n")
+            print(f"\nRunning model {args.model_name} with {args.weights} weights and {args.loss_type} loss.\n")
 
-            args.exp_name = f"{args.model_name}_{args.init}_{args.exp_name}"
+
+            # args.exp_name = f"{args.model_name}_{args.init}_{args.exp_name}"
+            args.exp_name = f"{args.model_name}_{args.weights}_{args.exp_name}"
             model_path = Path("./models") / args.dataset_name / args.exp_name
             output_path = Path("./outputs") / args.dataset_name / args.exp_name
             model_path.mkdir(parents=True, exist_ok=True)
@@ -144,7 +148,12 @@ def main():
     
 
 def print_class_distribution(dataset, set_name, class_names):
-    labels = dataset.labels  # Shape: (N, num_classes)
+    # Handle Subset objects
+    if isinstance(dataset, torch.utils.data.Subset):
+        labels = dataset.dataset.labels[dataset.indices]
+    else:
+        labels = dataset.labels  # Direct access if not a Subset
+
     class_counts = labels.sum(axis=0)  # Sum along axis 0 to count per class
     print(f"Class distribution in {set_name}:")
     for class_name, count in zip(class_names, class_counts):

@@ -129,10 +129,11 @@ def run_experiments(args, train_loader, val_loader, test_loader, model_path, out
         torch.cuda.empty_cache()
         model = build_model(args).to(args.device)
         remove_inplace_relu(model)
-        if args.opt == "adam":
-            optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
-        elif args.opt == "sgd":
-            optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
+        optimizer = create_optimizer(args, model)
+        # if args.opt == "adam":
+        #     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+        # elif args.opt == "sgd":
+        #     optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
         lr_scheduler, _ = create_scheduler(args, optimizer)
         if args.loss_type == "focal":
             loss_fn = FocalLoss(alpha=1.0, gamma=2.0)

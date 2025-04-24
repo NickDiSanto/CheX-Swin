@@ -706,3 +706,79 @@
 [2025-04-19 04:07:24.405] All trials on all classes: AUC = [0.6678]
 [2025-04-19 04:07:24.405] Mean AUC over All trials = 0.6678
 [2025-04-19 04:07:24.405] AUC_STD over All trials:  = 0.0000
+[2025-04-24 01:19:48.538] vgg19_ImageNet_exper_run_1: ACC_ClassWise
+[2025-04-24 01:19:48.539]   Class 0: 0.8909
+[2025-04-24 01:19:48.539]   Class 1: 0.9748
+[2025-04-24 01:19:48.539]   Class 2: 0.8750
+[2025-04-24 01:19:48.539]   Class 3: 0.8161
+[2025-04-24 01:19:48.539]   Class 4: 0.9476
+[2025-04-24 01:19:48.539]   Class 5: 0.9387
+[2025-04-24 01:19:48.539]   Class 6: 0.9892
+[2025-04-24 01:19:48.539]   Class 7: 0.9510
+[2025-04-24 01:19:48.539]   Class 8: 0.9575
+[2025-04-24 01:19:48.539]   Class 9: 0.9825
+[2025-04-24 01:19:48.539]   Class 10: 0.9783
+[2025-04-24 01:19:48.539]   Class 11: 0.9828
+[2025-04-24 01:19:48.539]   Class 12: 0.9665
+[2025-04-24 01:19:48.539]   Class 13: 0.9982
+[2025-04-24 01:19:48.540] vgg19_ImageNet_exper_run_1: ACC_All_Classes = 0.9464
+[2025-04-24 01:19:48.614] vgg19_ImageNet_exper_run_1: AUC_ClassWise = [0.5392,0.566 ,0.5877,0.5639,0.5229,0.5578,0.5832,0.5084,0.5258,0.5233,
+ 0.5713,0.5457,0.5417,0.5847]
+[2025-04-24 01:19:48.614] vgg19_ImageNet_exper_run_1: AUC_All_Classes = 0.5515
+[2025-04-24 01:19:48.640] vgg19_ImageNet_exper_run_1: F1_Macro = [0.0023]
+[2025-04-24 01:19:48.640] vgg19_ImageNet_exper_run_1: PR_AUC_Macro = [0.136]
+[2025-04-24 01:19:48.643] vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 0 =
+[[8909    1]
+ [1090    0]]
+[2025-04-24 01:19:48.643] vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 1 =
+[[9748    0]
+ [ 252    0]]
+[2025-04-24 01:19:48.643] vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 2 =
+[[8750    0]
+ [1250    0]]
+[2025-04-24 01:19:48.643] vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 3 =
+[[8130   97]
+ [1742   31]]
+[2025-04-24 01:19:48.643] vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 4 =
+[[9476    0]
+ [ 524    0]]
+[2025-04-24 01:19:48.643] vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 5 =
+[[9387    0]
+ [ 613    0]]
+[2025-04-24 01:19:48.643] vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 6 =
+[[9892    0]
+ [ 108    0]]
+[2025-04-24 01:19:48.643] vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 7 =
+[[9510    0]
+ [ 490    0]]
+[2025-04-24 01:19:48.643] vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 8 =
+[[9575    0]
+ [ 425    0]]
+[2025-04-24 01:19:48.643] vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 9 =
+[[9825    0]
+ [ 175    0]]
+[2025-04-24 01:19:48.644] vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 10 =
+[[9783    0]
+ [ 217    0]]
+[2025-04-24 01:19:48.644] vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 11 =
+[[9828    1]
+ [ 171    0]]
+[2025-04-24 01:19:48.644] vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 12 =
+[[9665    0]
+ [ 335    0]]
+[2025-04-24 01:19:48.644] vgg19_ImageNet_exper_run_1: ConfusionMatrix_Class 13 =
+[[9982    0]
+ [  18    0]]
+[2025-04-24 01:19:48.644] vgg19_ImageNet_exper_run_1: ConfusionMatrix_Overall =
+[[132460     99]
+ [  7410     31]]
+[2025-04-24 01:19:48.672] vgg19_ImageNet_exper_run_1: F1_ClassWise = [0.    ,0.    ,0.    ,0.0326,0.    ,0.    ,0.    ,0.    ,0.    ,0.    ,
+ 0.    ,0.    ,0.    ,0.    ]
+[2025-04-24 01:19:48.672] vgg19_ImageNet_exper_run_1: PR_AUC_ClassWise = [ 0.0157, 0.0078, 0.0377, 0.035 , 0.0014, 0.0128, 0.0035,-0.0002, 0.0034,
+  0.0007, 0.0061, 0.0014, 0.0059, 0.0008]
+[2025-04-24 01:19:48.672] All trials on all classes: ACC = [0.9464]
+[2025-04-24 01:19:48.672] Mean ACC over All trials = 0.9464
+[2025-04-24 01:19:48.673] ACC_STD over All trials:  = 0.0000
+[2025-04-24 01:19:48.673] All trials on all classes: AUC = [0.5515]
+[2025-04-24 01:19:48.673] Mean AUC over All trials = 0.5515
+[2025-04-24 01:19:48.673] AUC_STD over All trials:  = 0.0000
