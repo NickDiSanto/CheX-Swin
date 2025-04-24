@@ -31,7 +31,8 @@ def parse_arguments():
 
     # Optimizer parameters
     parser.add_argument('--loss_type', type=str, default='bce', choices=['bce', 'focal'], help='Loss function type')
-    parser.add_argument("--opt", type=str, default="sgd", choices=["sgd", "adam"], help="Optimizer type")
+    # parser.add_argument("--opt", type=str, default="sgd", choices=["sgd", "adam"], help="Optimizer type")
+    parser.add_argument("--opt", type=str, default="sgd", choices=["sgd", "adamw"], help="Optimizer type")
     parser.add_argument("--lr", type=float, default=1e-2, help="Learning rate")
     parser.add_argument("--momentum", type=float, default=0.9, help="Momentum for SGD")
     parser.add_argument("--weight_decay", type=float, default=0.0, help="Weight decay")
@@ -82,10 +83,10 @@ def main():
         
         # Use a subset of the dataset for quick experimentation
         # subset_size = 500
-        # subset_size = 2000
-        # train_set, _ = random_split(train_set, [subset_size, len(train_set) - subset_size])
-        # val_set, _ = random_split(val_set, [subset_size, len(val_set) - subset_size])
-        # test_set, _ = random_split(test_set, [subset_size, len(test_set) - subset_size])
+        subset_size = 10000
+        train_set, _ = random_split(train_set, [subset_size, len(train_set) - subset_size])
+        val_set, _ = random_split(val_set, [subset_size, len(val_set) - subset_size])
+        test_set, _ = random_split(test_set, [subset_size, len(test_set) - subset_size])
 
         train_loader = DataLoader(
             dataset=train_set,
@@ -122,21 +123,19 @@ def main():
         # model_names = ["vgg19"]
         # model_names = ["swin_base"]
         # model_names = ["resnet18"]
-        init_weights = ["ImageNet"]
 
         for model in model_names:
-            for weights in init_weights:
-                args.model_name = model
-                args.init = weights
-                print(f"\nRunning model {args.model_name} with {args.init} weights and {args.loss_type} loss.\n")
+            args.model_name = model
+            args.init = "ImageNet"
+            print(f"\nRunning model {args.model_name} with {args.init} weights and {args.loss_type} loss.\n")
 
-                args.exp_name = f"{args.model_name}_{args.init}_{args.exp_name}"
-                model_path = Path("./models") / args.dataset_name / args.exp_name
-                output_path = Path("./outputs") / args.dataset_name / args.exp_name
-                model_path.mkdir(parents=True, exist_ok=True)
-                output_path.mkdir(parents=True, exist_ok=True)
+            args.exp_name = f"{args.model_name}_{args.init}_{args.exp_name}"
+            model_path = Path("./models") / args.dataset_name / args.exp_name
+            output_path = Path("./outputs") / args.dataset_name / args.exp_name
+            model_path.mkdir(parents=True, exist_ok=True)
+            output_path.mkdir(parents=True, exist_ok=True)
 
-                run_experiments(args, train_loader, val_loader, test_loader, model_path, output_path)
+            run_experiments(args, train_loader, val_loader, test_loader, model_path, output_path)
 
     elif args.dataset_name == "JSRT":
         print("JSRT dataset is not implemented yet.")
