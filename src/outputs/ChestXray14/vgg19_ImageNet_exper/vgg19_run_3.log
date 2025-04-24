@@ -1,0 +1,17 @@
+[2025-04-24 04:37:40.996] Namespace(dataset_name='ChestXray14', model_name='vgg19', init='ImageNet', normalization='imagenet', num_classes=14, in_chans=3, img_size=224, epochs=40, batch_size=128, seed=1234, num_trial=3, device='cuda', patience=5, loss_type='bce', opt='adamw', lr=0.001, momentum=0.9, weight_decay=0.0, clip_grad=None, num_workers=4, sched='cosine', warmup_lr=1e-06, min_lr=1e-05, warmup_epochs=20, cooldown_epochs=10, decay_epochs=30.0, decay_rate=0.5, output_dir=None, exp_name='vgg19_ImageNet_exper', weights='ImageNet', plot_path=PosixPath('outputs/ChestXray14/vgg19_ImageNet_exper/vgg19_ImageNet_exper_run_3.pdf'))
+[2025-04-24 04:41:46.642] Run:3-Epoch:1, TrainLoss:0.4050, TrainAcc:0.8484
+[2025-04-24 04:41:57.710] Run:3-Epoch:1, ValidLoss:0.2047, ValidAcc:0.9478
+[2025-04-24 04:46:05.025] Run:3-Epoch:2, TrainLoss:0.3707, TrainAcc:0.8554
+[2025-04-24 04:46:16.109] Run:3-Epoch:2, ValidLoss:0.1990, ValidAcc:0.9461
+[2025-04-24 04:50:23.653] Run:3-Epoch:3, TrainLoss:0.3304, TrainAcc:0.8662
+[2025-04-24 04:50:34.662] Run:3-Epoch:3, ValidLoss:0.2083, ValidAcc:0.9364
+[2025-04-24 04:54:38.673] Run:3-Epoch:4, TrainLoss:0.2928, TrainAcc:0.8784
+[2025-04-24 04:54:49.633] Run:3-Epoch:4, ValidLoss:0.2010, ValidAcc:0.9343
+[2025-04-24 04:58:52.927] Run:3-Epoch:5, TrainLoss:0.2610, TrainAcc:0.8911
+[2025-04-24 04:59:03.843] Run:3-Epoch:5, ValidLoss:0.2128, ValidAcc:0.9308
+[2025-04-24 05:03:06.271] Run:3-Epoch:6, TrainLoss:0.2377, TrainAcc:0.9010
+[2025-04-24 05:03:17.139] Run:3-Epoch:6, ValidLoss:0.2365, ValidAcc:0.9198
+[2025-04-24 05:07:18.418] Run:3-Epoch:7, TrainLoss:0.2080, TrainAcc:0.9146
+[2025-04-24 05:07:29.241] Run:3-Epoch:7, ValidLoss:0.2506, ValidAcc:0.9153
+[2025-04-24 05:11:28.993] Run:3-Epoch:8, TrainLoss:0.1842, TrainAcc:0.9247
+[2025-04-24 05:11:39.749] Run:3-Epoch:8, ValidLoss:0.2364, ValidAcc:0.9182

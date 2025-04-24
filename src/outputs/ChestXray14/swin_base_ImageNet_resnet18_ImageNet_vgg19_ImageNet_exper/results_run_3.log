@@ -1,0 +1,76 @@
+[2025-04-24 10:29:47.862] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ACC_ClassWise
+[2025-04-24 10:29:47.862]   Class 0: 0.8622
+[2025-04-24 10:29:47.862]   Class 1: 0.9394
+[2025-04-24 10:29:47.862]   Class 2: 0.8592
+[2025-04-24 10:29:47.862]   Class 3: 0.7976
+[2025-04-24 10:29:47.862]   Class 4: 0.9426
+[2025-04-24 10:29:47.862]   Class 5: 0.9305
+[2025-04-24 10:29:47.862]   Class 6: 0.9664
+[2025-04-24 10:29:47.862]   Class 7: 0.9339
+[2025-04-24 10:29:47.862]   Class 8: 0.9536
+[2025-04-24 10:29:47.862]   Class 9: 0.9487
+[2025-04-24 10:29:47.862]   Class 10: 0.9704
+[2025-04-24 10:29:47.862]   Class 11: 0.9494
+[2025-04-24 10:29:47.862]   Class 12: 0.9652
+[2025-04-24 10:29:47.862]   Class 13: 0.9914
+[2025-04-24 10:29:47.863] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ACC_All_Classes = 0.9293
+[2025-04-24 10:29:47.873] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: AUC_ClassWise = [0.7601,0.8862,0.8514,0.657 ,0.7703,0.653 ,0.6781,0.854 ,0.6981,0.8744,
+ 0.8888,0.7192,0.6973,0.8658]
+[2025-04-24 10:29:47.873] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: AUC_All_Classes = 0.7753
+[2025-04-24 10:29:47.915] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: F1_Macro = [0.2521]
+[2025-04-24 10:29:47.916] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: PR_AUC_Macro = [0.2613]
+[2025-04-24 10:29:47.921] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ConfusionMatrix_Class 0 =
+[[18570  1443]
+ [ 1648   772]]
+[2025-04-24 10:29:47.921] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ConfusionMatrix_Class 1 =
+[[20799  1052]
+ [  308   274]]
+[2025-04-24 10:29:47.922] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ConfusionMatrix_Class 2 =
+[[17650  2029]
+ [ 1129  1625]]
+[2025-04-24 10:29:47.922] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ConfusionMatrix_Class 3 =
+[[16765  1730]
+ [ 2810  1128]]
+[2025-04-24 10:29:47.922] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ConfusionMatrix_Class 4 =
+[[20841   459]
+ [  828   305]]
+[2025-04-24 10:29:47.922] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ConfusionMatrix_Class 5 =
+[[20668   430]
+ [ 1128   207]]
+[2025-04-24 10:29:47.922] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ConfusionMatrix_Class 6 =
+[[21647   544]
+ [  209    33]]
+[2025-04-24 10:29:47.922] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ConfusionMatrix_Class 7 =
+[[20465   879]
+ [  604   485]]
+[2025-04-24 10:29:47.922] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ConfusionMatrix_Class 8 =
+[[21373   103]
+ [  937    20]]
+[2025-04-24 10:29:47.922] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ConfusionMatrix_Class 9 =
+[[21122   898]
+ [  252   161]]
+[2025-04-24 10:29:47.922] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ConfusionMatrix_Class 10 =
+[[21539   385]
+ [  279   230]]
+[2025-04-24 10:29:47.922] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ConfusionMatrix_Class 11 =
+[[21218   853]
+ [  281    81]]
+[2025-04-24 10:29:47.922] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ConfusionMatrix_Class 12 =
+[[21606    93]
+ [  687    47]]
+[2025-04-24 10:29:47.923] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ConfusionMatrix_Class 13 =
+[[22222   169]
+ [   23    19]]
+[2025-04-24 10:29:47.923] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: ConfusionMatrix_Overall =
+[[286485  11067]
+ [ 11123   5387]]
+[2025-04-24 10:29:47.973] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: F1_ClassWise = [0.3331,0.2872,0.5072,0.332 ,0.3216,0.2099,0.0806,0.3954,0.037 ,0.2188,
+ 0.4093,0.125 ,0.1076,0.1652]
+[2025-04-24 10:29:47.973] swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3: PR_AUC_ClassWise = [0.1875,0.2007,0.3584,0.1357,0.212 ,0.1025,0.0235,0.2608,0.0622,0.1343,
+ 0.2863,0.0647,0.0728,0.2767]
+[2025-04-24 10:29:47.973] All trials on all classes: ACC = [0.9366,0.9347,0.9293]
+[2025-04-24 10:29:47.973] Mean ACC over All trials = 0.9335
+[2025-04-24 10:29:47.973] ACC_STD over All trials:  = 0.0031
+[2025-04-24 10:29:47.973] All trials on all classes: AUC = [0.791 ,0.7735,0.7753]
+[2025-04-24 10:29:47.973] Mean AUC over All trials = 0.7799
+[2025-04-24 10:29:47.973] AUC_STD over All trials:  = 0.0079

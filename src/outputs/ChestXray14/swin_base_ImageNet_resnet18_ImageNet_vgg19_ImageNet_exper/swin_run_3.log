@@ -1,0 +1,21 @@
+[2025-04-24 08:54:18.976] Namespace(dataset_name='ChestXray14', model_name='swin_base', init='ImageNet', normalization='imagenet', num_classes=14, in_chans=3, img_size=224, epochs=40, batch_size=128, seed=1234, num_trial=3, device='cuda', patience=5, loss_type='bce', opt='adamw', lr=0.001, momentum=0.9, weight_decay=0.0, clip_grad=None, num_workers=4, sched='cosine', warmup_lr=1e-06, min_lr=1e-05, warmup_epochs=20, cooldown_epochs=10, decay_epochs=30.0, decay_rate=0.5, output_dir=None, exp_name='swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper', weights='ImageNet', plot_path=PosixPath('outputs/ChestXray14/swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper/swin_base_ImageNet_resnet18_ImageNet_vgg19_ImageNet_exper_run_3.pdf'))
+[2025-04-24 09:03:13.664] Run:3-Epoch:1, TrainLoss:0.4313, TrainAcc:0.8304
+[2025-04-24 09:03:42.276] Run:3-Epoch:1, ValidLoss:0.2416, ValidAcc:0.9487
+[2025-04-24 09:12:38.639] Run:3-Epoch:2, TrainLoss:0.3836, TrainAcc:0.8539
+[2025-04-24 09:13:07.242] Run:3-Epoch:2, ValidLoss:0.2262, ValidAcc:0.9473
+[2025-04-24 09:22:04.646] Run:3-Epoch:3, TrainLoss:0.3331, TrainAcc:0.8659
+[2025-04-24 09:22:33.268] Run:3-Epoch:3, ValidLoss:0.2066, ValidAcc:0.9363
+[2025-04-24 09:31:31.976] Run:3-Epoch:4, TrainLoss:0.2858, TrainAcc:0.8809
+[2025-04-24 09:32:00.711] Run:3-Epoch:4, ValidLoss:0.2053, ValidAcc:0.9302
+[2025-04-24 09:41:03.848] Run:3-Epoch:5, TrainLoss:0.2492, TrainAcc:0.8958
+[2025-04-24 09:41:32.662] Run:3-Epoch:5, ValidLoss:0.2408, ValidAcc:0.9200
+[2025-04-24 09:50:32.163] Run:3-Epoch:6, TrainLoss:0.2188, TrainAcc:0.9094
+[2025-04-24 09:51:00.905] Run:3-Epoch:6, ValidLoss:0.2149, ValidAcc:0.9224
+[2025-04-24 09:59:59.513] Run:3-Epoch:7, TrainLoss:0.1921, TrainAcc:0.9207
+[2025-04-24 10:00:28.167] Run:3-Epoch:7, ValidLoss:0.2281, ValidAcc:0.9203
+[2025-04-24 10:09:29.156] Run:3-Epoch:8, TrainLoss:0.1719, TrainAcc:0.9300
+[2025-04-24 10:09:57.843] Run:3-Epoch:8, ValidLoss:0.2235, ValidAcc:0.9244
+[2025-04-24 10:18:55.039] Run:3-Epoch:9, TrainLoss:0.1535, TrainAcc:0.9379
+[2025-04-24 10:19:23.734] Run:3-Epoch:9, ValidLoss:0.2528, ValidAcc:0.9104
+[2025-04-24 10:28:20.674] Run:3-Epoch:10, TrainLoss:0.1472, TrainAcc:0.9407
+[2025-04-24 10:28:49.312] Run:3-Epoch:10, ValidLoss:0.2382, ValidAcc:0.9169
